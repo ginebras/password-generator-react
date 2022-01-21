@@ -10,10 +10,15 @@ import {
 
 export default function App() {
   const [password, setPassword] = useState(20);
+
   const [lowercase, setLowercase] = useState(true);
   const [uppercase, setUppercase] = useState(true);
-  const [numbers, setNumbers] = useState(true);
+  const [number, setNumbers] = useState(true);
   const [symbols, setSymbols] = useState(true);
+
+  const handleGeneratorPassword = () => {};
+  const handleCreator = () => {};
+  const generatorRandomIndex = () => {};
 
   return (
     <div className="container">
@@ -31,32 +36,47 @@ export default function App() {
             id="password-length"
             max="20"
             min="7"
-            value="9"
           />
         </div>
 
         <div>
-          <label htmlFor="uppercase-letters">uppercase letters</label>
+          <label htmlFor="upper-letters">uppercase letters</label>
           <input
             type="checkbox"
-            name="uppercase-letters"
-            id="uppercase-letters"
+            name="upper-letters"
+            id="upper-letters"
+            onClick={() => setUppercase(!uppercase)}
           />
         </div>
 
         <div>
           <label htmlFor="lower-letters">lowercase letters</label>
-          <input type="checkbox" name="lower-letters" id="lower-letters" />
+          <input
+            type="checkbox"
+            name="lower-letters"
+            id="lower-letters"
+            onClick={() => setLowercase(!lowercase)}
+          />
         </div>
 
         <div>
           <label htmlFor="number">numbers</label>
-          <input type="checkbox" name="number" id="number" />
+          <input
+            type="checkbox"
+            name="number"
+            id="number"
+            onClick={() => setNumbers(!number)}
+          />
         </div>
 
         <div>
           <label htmlFor="symbols">symbols</label>
-          <input type="checkbox" name="symbols" id="symbols" />
+          <input
+            type="checkbox"
+            name="symbols"
+            id="symbols"
+            onClick={() => setSymbols(!symbols)}
+          />
         </div>
       </div>
     </div>

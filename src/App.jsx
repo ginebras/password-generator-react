@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css';
 
+import {
+  numbers,
+  upperCaseLetters,
+  lowerCaseLetters,
+  specialCharacters,
+} from './characters';
+
 export default function App() {
+  const [password, setPassword] = useState(20);
+  const [lowercase, setLowercase] = useState(true);
+  const [uppercase, setUppercase] = useState(true);
+  const [numbers, setNumbers] = useState(true);
+  const [symbols, setSymbols] = useState(true);
+
   return (
     <div className="container">
       <div className="generator">

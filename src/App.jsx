@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
 
 import {
@@ -9,21 +9,68 @@ import {
 } from './characters';
 
 export default function App() {
-  const [password, setPassword] = useState(20);
+  const [password, setPassword] = useState();
+  const [passwordLength, setPasswordLength] = useState(20);
 
-  const [lowercase, setLowercase] = useState(true);
-  const [uppercase, setUppercase] = useState(true);
-  const [number, setNumbers] = useState(true);
-  const [symbols, setSymbols] = useState(true);
+  const [lowercase, setLowercase] = useState(false);
+  const [uppercase, setUppercase] = useState(false);
+  const [number, setNumbers] = useState(false);
+  const [symbols, setSymbols] = useState(false);
 
-  const handleGeneratorPassword = () => {};
-  const handleCreator = () => {};
-  const generatorRandomIndex = () => {};
+  useEffect(() => {
+    console.log('lowercase:', lowercase);
+    console.log('uppercase:', uppercase);
+    console.log('number:', number);
+    console.log('symbols:', symbols);
+    console.log('passwordLength:', passwordLength);
+  }, [lowercase, uppercase, number, symbols, passwordLength]);
+
+  const handleGeneratorPassword = () => {
+    let characterList = '';
+
+    if (!lowercase && !uppercase && !number && !symbols) {
+      alert('you must choose at least 1 option');
+    }
+
+    if (lowercase) {
+      characterList += lowerCaseLetters;
+    }
+
+    if (uppercase) {
+      characterList += upperCaseLetters;
+    }
+
+    if (number) {
+      characterList += numbers;
+    }
+
+    if (symbols) {
+      characterList += specialCharacters;
+    }
+
+    setPassword(handleCreator(characterList));
+  };
+  const handleCreator = (characterList) => {
+    let password = '';
+    const characterLength = characterList.length;
+
+    for (let i = 0; i < passwordLength; i++) {
+      const characterIndex = generatorRandomIndex(characterLength);
+      password = password + characterList.charAt(characterIndex);
+    }
+
+    return password;
+  };
+  const generatorRandomIndex = (limit) => {
+    return Math.round(Math.random() * limit);
+  };
 
   return (
     <div className="container">
       <div className="generator">
         <h2>Password generator</h2>
+        <strong>{password}</strong>
+        <br />
         <button className="btn btn-primary">
           <i className="bi bi-clipboard-check"></i>
         </button>
@@ -36,6 +83,8 @@ export default function App() {
             id="password-length"
             max="20"
             min="7"
+            value={passwordLength}
+            onChange={(e) => setPasswordLength(e.target.value)}
           />
         </div>
 
@@ -77,6 +126,15 @@ export default function App() {
             id="symbols"
             onClick={() => setSymbols(!symbols)}
           />
+        </div>
+
+        <div>
+          <button
+            className="btn btn-primary"
+            name="symbols"
+            id="symbols"
+            onClick={handleGeneratorPassword}
+          >generate password</button>
         </div>
       </div>
     </div>

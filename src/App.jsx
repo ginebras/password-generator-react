@@ -56,7 +56,7 @@ export default function App() {
 
     for (let i = 0; i < passwordLength; i++) {
       const characterIndex = generatorRandomIndex(characterLength);
-      password = password + characterList.charAt(characterIndex);
+      password = password + characterList[characterIndex];
     }
 
     return password;
@@ -134,7 +134,9 @@ export default function App() {
             name="symbols"
             id="symbols"
             onClick={handleGeneratorPassword}
-          >generate password</button>
+          >
+            generate password
+          </button>
         </div>
       </div>
     </div>
